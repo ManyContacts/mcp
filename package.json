@@ -1,0 +1,58 @@
+{
+  "name": "@manycontacts/mcp",
+  "version": "1.0.0",
+  "description": "MCP server for ManyContacts — WhatsApp Business CRM operations, messaging, campaigns, AI agents, and contact management via Model Context Protocol",
+  "type": "module",
+  "main": "build/index.js",
+  "bin": {
+    "manycontacts-mcp": "build/index.js"
+  },
+  "files": [
+    "build/",
+    "README.md",
+    "server.json"
+  ],
+  "mcpName": "io.github.manycontacts/whatsapp-business",
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsc --watch"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "whatsapp",
+    "whatsapp-business",
+    "manycontacts",
+    "crm",
+    "messaging",
+    "ai-agent",
+    "claude",
+    "cursor"
+  ],
+  "author": "ManyContacts <hello@manycontacts.com> (https://manycontacts.com)",
+  "homepage": "https://github.com/manycontacts/mcp#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manycontacts/mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/manycontacts/mcp/issues"
+  },
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "axios": "^1.7.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}

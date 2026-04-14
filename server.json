@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.manycontacts/whatsapp-business",
+  "title": "ManyContacts - WhatsApp Business CRM",
+  "description": "Send WhatsApp messages, manage contacts, run bulk campaigns, configure AI auto-reply agents, and perform all WhatsApp Business CRM operations via ManyContacts.",
+  "repository": {
+    "url": "https://github.com/manycontacts/mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "@manycontacts/mcp",
+      "version": "1.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "description": "ManyContacts CLI authentication token. Get one at https://manycontacts.com or via: npx @manycontacts/cli auth login",
+          "isRequired": true,
+          "isSecret": true,
+          "name": "MC_CLI_TOKEN"
+        }
+      ]
+    }
+  ]
+}
