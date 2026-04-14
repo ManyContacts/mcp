@@ -1,21 +1,25 @@
 import axios, { type AxiosInstance } from "axios";
-import { getToken, getApiUrl } from "./config.js";
 
 let _client: AxiosInstance | null = null;
+let _token: string | null = null;
+let _apiUrl = "https://api.manycontacts.com";
 
-export function getClient(): AxiosInstance {
+export function configure(token: string, apiUrl?: string) {
+  _token = token;
+  if (apiUrl) _apiUrl = apiUrl;
+  _client = null;
+}
+
+function getClient(): AxiosInstance {
   if (_client) return _client;
 
-  const token = getToken();
-  const apiUrl = getApiUrl();
-
   _client = axios.create({
-    baseURL: `${apiUrl}/cli/v1`,
+    baseURL: `${_apiUrl}/cli/v1`,
     timeout: 30000,
     headers: {
       "Content-Type": "application/json",
       "User-Agent": "manycontacts-mcp/1.0.0",
-      ...(token ? { "cli-token": token } : {}),
+      ...(_token ? { "cli-token": _token } : {}),
     },
   });
 

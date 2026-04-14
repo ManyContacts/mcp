@@ -1,9 +1,13 @@
 {
   "name": "@manycontacts/mcp",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "MCP server for ManyContacts — WhatsApp Business CRM operations, messaging, campaigns, AI agents, and contact management via Model Context Protocol",
   "type": "module",
   "main": "build/index.js",
+  "exports": {
+    ".": "./build/index.js",
+    "./smithery": "./build/smithery.js"
+  },
   "bin": {
     "manycontacts-mcp": "build/index.js"
   },
@@ -31,7 +35,8 @@
     "messaging",
     "ai-agent",
     "claude",
-    "cursor"
+    "cursor",
+    "smithery"
   ],
   "author": "ManyContacts <hello@manycontacts.com> (https://manycontacts.com)",
   "homepage": "https://github.com/manycontacts/mcp#readme",
@@ -52,6 +57,7 @@
     "zod": "^3.25.0"
   },
   "devDependencies": {
+    "@smithery/sdk": "^4.3.0",
     "@types/node": "^22.0.0",
     "typescript": "^5.7.0"
   }
