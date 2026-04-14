@@ -1,6 +1,6 @@
 {
   "name": "@manycontacts/mcp",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "MCP server for ManyContacts — WhatsApp Business CRM operations, messaging, campaigns, AI agents, and contact management via Model Context Protocol",
   "type": "module",
   "main": "build/index.js",
@@ -12,7 +12,7 @@
     "README.md",
     "server.json"
   ],
-  "mcpName": "io.github.manycontacts/whatsapp-business",
+  "mcpName": "io.github.ManyContacts/whatsapp-business",
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
