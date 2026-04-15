@@ -12,7 +12,7 @@ function err(e: unknown) {
 
 export function registerCampaignTools(server: McpServer) {
   server.tool(
-    "manycontacts_campaigns_list",
+    "manycontacts.campaigns.list",
     "List WhatsApp Business bulk messaging campaigns with statistics (sent, delivered, read, failed counts)",
     {},
     async () => {
@@ -24,7 +24,7 @@ export function registerCampaignTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_campaigns_create",
+    "manycontacts.campaigns.create",
     "Create a WhatsApp Business bulk messaging campaign. Sends a template message to a list of phone numbers at a scheduled time.",
     {
       name: z.string().describe("Campaign name"),
@@ -49,7 +49,7 @@ export function registerCampaignTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_campaigns_delete",
+    "manycontacts.campaigns.delete",
     "Delete a WhatsApp Business campaign",
     {
       id: z.string().describe("Campaign ID to delete"),

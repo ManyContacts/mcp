@@ -14,7 +14,7 @@ const phone = z.string().describe("Phone number with country code, e.g. 34600000
 
 export function registerContactTools(server: McpServer) {
   server.tool(
-    "manycontacts_contacts_list",
+    "manycontacts.contacts.list",
     "List WhatsApp Business contacts with filters. Returns paginated results.",
     {
       page: z.number().optional().describe("Page number (default 1)"),
@@ -39,7 +39,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_get",
+    "manycontacts.contacts.get",
     "Get detailed information about a WhatsApp Business contact including tags, teams, and funnel stages",
     { phone },
     async ({ phone }) => {
@@ -51,7 +51,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_create",
+    "manycontacts.contacts.create",
     "Create a new WhatsApp Business contact in ManyContacts CRM",
     {
       phone,
@@ -67,7 +67,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_update",
+    "manycontacts.contacts.update",
     "Update an existing WhatsApp Business contact (name, notes, custom fields)",
     {
       phone,
@@ -88,7 +88,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_delete",
+    "manycontacts.contacts.delete",
     "Delete a WhatsApp Business contact from ManyContacts CRM",
     { phone },
     async ({ phone }) => {
@@ -100,7 +100,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_assign",
+    "manycontacts.contacts.assign",
     "Assign a WhatsApp Business contact to a team member",
     {
       phone,
@@ -115,7 +115,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_unassign",
+    "manycontacts.contacts.unassign",
     "Unassign a WhatsApp Business contact (remove user assignment)",
     { phone },
     async ({ phone }) => {
@@ -127,7 +127,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_close",
+    "manycontacts.contacts.close",
     "Close a WhatsApp Business conversation",
     { phone },
     async ({ phone }) => {
@@ -139,7 +139,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_open",
+    "manycontacts.contacts.open",
     "Reopen a closed WhatsApp Business conversation",
     { phone },
     async ({ phone }) => {
@@ -151,7 +151,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_tag_add",
+    "manycontacts.contacts.tag.add",
     "Add a tag to a WhatsApp Business contact",
     {
       phone,
@@ -166,7 +166,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_tag_remove",
+    "manycontacts.contacts.tag.remove",
     "Remove a tag from a WhatsApp Business contact",
     {
       phone,
@@ -181,7 +181,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_team_add",
+    "manycontacts.contacts.team.add",
     "Add a team to a WhatsApp Business contact",
     {
       phone,
@@ -196,7 +196,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_team_remove",
+    "manycontacts.contacts.team.remove",
     "Remove a team from a WhatsApp Business contact",
     {
       phone,
@@ -211,7 +211,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_set_stage",
+    "manycontacts.contacts.set_stage",
     "Move a WhatsApp Business contact to a funnel/pipeline stage",
     {
       phone,
@@ -227,7 +227,7 @@ export function registerContactTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_contacts_bulk",
+    "manycontacts.contacts.bulk",
     "Perform bulk operations on multiple WhatsApp Business contacts (close, open, assign, add_tag, add_team)",
     {
       action: z.enum(["close", "open", "assign", "add_tag", "add_team"]).describe("Bulk action to perform"),

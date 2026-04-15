@@ -11,7 +11,7 @@ function err(e: unknown) {
 
 export function registerChannelTools(server: McpServer) {
   server.tool(
-    "manycontacts_channels_list",
+    "manycontacts.channels.list",
     "List connected WhatsApp Business and Instagram channels",
     {},
     async () => {

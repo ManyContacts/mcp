@@ -12,7 +12,7 @@ function err(e: unknown) {
 
 export function registerFunnelTools(server: McpServer) {
   server.tool(
-    "manycontacts_funnels_list",
+    "manycontacts.funnels.list",
     "List sales funnels/pipelines for organizing WhatsApp Business contacts by stage",
     {},
     async () => {
@@ -24,7 +24,7 @@ export function registerFunnelTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_funnels_create",
+    "manycontacts.funnels.create",
     "Create a new sales funnel/pipeline for WhatsApp Business contacts",
     { name: z.string().describe("Funnel name") },
     async ({ name }) => {
@@ -36,7 +36,7 @@ export function registerFunnelTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_funnels_add_stage",
+    "manycontacts.funnels.add_stage",
     "Add a stage to a sales funnel/pipeline",
     {
       funnelId: z.string().describe("Funnel ID"),
@@ -52,7 +52,7 @@ export function registerFunnelTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_funnels_update_stage",
+    "manycontacts.funnels.update_stage",
     "Update a stage in a sales funnel/pipeline",
     {
       funnelId: z.string().describe("Funnel ID"),
@@ -70,7 +70,7 @@ export function registerFunnelTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_funnels_delete",
+    "manycontacts.funnels.delete",
     "Delete a sales funnel/pipeline",
     { id: z.string().describe("Funnel ID to delete") },
     async ({ id }) => {
@@ -82,7 +82,7 @@ export function registerFunnelTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_funnels_contacts",
+    "manycontacts.funnels.contacts",
     "List contacts in a funnel/pipeline, optionally filtered by stage",
     {
       funnelId: z.string().describe("Funnel ID"),

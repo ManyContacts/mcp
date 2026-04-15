@@ -12,7 +12,7 @@ function err(e: unknown) {
 
 export function registerTagTools(server: McpServer) {
   server.tool(
-    "manycontacts_tags_list",
+    "manycontacts.tags.list",
     "List all tags for categorizing WhatsApp Business contacts",
     {},
     async () => {
@@ -24,7 +24,7 @@ export function registerTagTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_tags_create",
+    "manycontacts.tags.create",
     "Create a new tag for WhatsApp Business contacts",
     {
       name: z.string().describe("Tag name"),
@@ -39,7 +39,7 @@ export function registerTagTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_tags_update",
+    "manycontacts.tags.update",
     "Update an existing WhatsApp Business contact tag",
     {
       id: z.string().describe("Tag ID"),
@@ -58,7 +58,7 @@ export function registerTagTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_tags_delete",
+    "manycontacts.tags.delete",
     "Delete a WhatsApp Business contact tag",
     { id: z.string().describe("Tag ID to delete") },
     async ({ id }) => {

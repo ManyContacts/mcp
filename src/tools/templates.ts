@@ -12,7 +12,7 @@ function err(e: unknown) {
 
 export function registerTemplateTools(server: McpServer) {
   server.tool(
-    "manycontacts_templates_list",
+    "manycontacts.templates.list",
     "List WhatsApp Business message templates. Templates are required for sending messages outside the 24h conversation window.",
     {
       status: z.enum(["approved", "pending", "rejected"]).optional().describe("Filter by template status"),
@@ -28,7 +28,7 @@ export function registerTemplateTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_templates_get",
+    "manycontacts.templates.get",
     "Get details of a specific WhatsApp Business message template including components and configuration",
     {
       id: z.string().describe("Template ID"),
@@ -42,7 +42,7 @@ export function registerTemplateTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_templates_sync",
+    "manycontacts.templates.sync",
     "Sync WhatsApp Business templates from Meta Cloud API. Fetches the latest templates from the connected WhatsApp Business account.",
     {},
     async () => {

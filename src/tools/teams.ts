@@ -12,7 +12,7 @@ function err(e: unknown) {
 
 export function registerTeamTools(server: McpServer) {
   server.tool(
-    "manycontacts_teams_list",
+    "manycontacts.teams.list",
     "List teams in the WhatsApp Business organization",
     {},
     async () => {
@@ -24,7 +24,7 @@ export function registerTeamTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_teams_create",
+    "manycontacts.teams.create",
     "Create a new team in the WhatsApp Business organization",
     { name: z.string().describe("Team name") },
     async ({ name }) => {
@@ -36,7 +36,7 @@ export function registerTeamTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_teams_add_member",
+    "manycontacts.teams.add_member",
     "Add a user to a team",
     {
       teamId: z.string().describe("Team ID"),
@@ -51,7 +51,7 @@ export function registerTeamTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_teams_remove_member",
+    "manycontacts.teams.remove_member",
     "Remove a user from a team",
     {
       teamId: z.string().describe("Team ID"),
@@ -66,7 +66,7 @@ export function registerTeamTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_teams_delete",
+    "manycontacts.teams.delete",
     "Delete a team from the WhatsApp Business organization",
     { id: z.string().describe("Team ID to delete") },
     async ({ id }) => {

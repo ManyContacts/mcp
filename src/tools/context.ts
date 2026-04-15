@@ -7,7 +7,7 @@ function json(data: unknown): string {
 
 export function registerContextTools(server: McpServer) {
   server.tool(
-    "manycontacts_context",
+    "manycontacts.context",
     "Get ManyContacts account overview: WhatsApp Business channels, contact/user/tag counts, active AI agents, and enabled features. Use this first to understand the account state.",
     {},
     async () => {

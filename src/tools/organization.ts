@@ -12,7 +12,7 @@ function err(e: unknown) {
 
 export function registerOrganizationTools(server: McpServer) {
   server.tool(
-    "manycontacts_org_get",
+    "manycontacts.org.get",
     "Get WhatsApp Business organization/account information (name, timezone, settings)",
     {},
     async () => {
@@ -24,7 +24,7 @@ export function registerOrganizationTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_org_update",
+    "manycontacts.org.update",
     "Update WhatsApp Business organization settings (timezone, auto-reply, webhooks, etc.)",
     {
       timezone: z.string().optional().describe("Timezone, e.g. Europe/Madrid"),
@@ -47,7 +47,7 @@ export function registerOrganizationTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_org_schedule_get",
+    "manycontacts.org.schedule.get",
     "Get the business hours schedule for the WhatsApp Business account",
     {},
     async () => {
@@ -59,7 +59,7 @@ export function registerOrganizationTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_org_apikey",
+    "manycontacts.org.apikey",
     "Get the organization API key",
     {},
     async () => {

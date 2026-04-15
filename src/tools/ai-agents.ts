@@ -12,7 +12,7 @@ function err(e: unknown) {
 
 export function registerAiAgentTools(server: McpServer) {
   server.tool(
-    "manycontacts_ai_agents_list",
+    "manycontacts.ai_agents.list",
     "List AI agents configured to auto-respond to WhatsApp Business messages",
     {},
     async () => {
@@ -24,7 +24,7 @@ export function registerAiAgentTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_ai_agents_get",
+    "manycontacts.ai_agents.get",
     "Get details of a specific WhatsApp AI agent including scenarios and configuration",
     { id: z.string().describe("AI Agent ID (UUID)") },
     async ({ id }) => {
@@ -36,7 +36,7 @@ export function registerAiAgentTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_ai_agents_update",
+    "manycontacts.ai_agents.update",
     "Update a WhatsApp AI agent's configuration (instructions, active status, etc.)",
     {
       id: z.string().describe("AI Agent ID (UUID)"),
@@ -58,7 +58,7 @@ export function registerAiAgentTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_ai_agents_feedback",
+    "manycontacts.ai_agents.feedback",
     "Get feedback/conversation logs for a WhatsApp AI agent",
     { id: z.string().describe("AI Agent ID (UUID)") },
     async ({ id }) => {

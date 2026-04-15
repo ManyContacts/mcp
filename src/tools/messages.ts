@@ -14,7 +14,7 @@ const phone = z.string().describe("Phone number with country code, e.g. 34600000
 
 export function registerMessageTools(server: McpServer) {
   server.tool(
-    "manycontacts_messages_list",
+    "manycontacts.messages.list",
     "List WhatsApp Business messages for a contact. Shows the conversation history with timestamps and status.",
     {
       phone,
@@ -33,7 +33,7 @@ export function registerMessageTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_messages_send_text",
+    "manycontacts.messages.send.text",
     "Send a WhatsApp Business text message to a phone number",
     {
       phone,
@@ -48,7 +48,7 @@ export function registerMessageTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_messages_send_note",
+    "manycontacts.messages.send.note",
     "Send an internal note on a WhatsApp Business contact (not visible to the contact)",
     {
       phone,
@@ -63,7 +63,7 @@ export function registerMessageTools(server: McpServer) {
   );
 
   server.tool(
-    "manycontacts_messages_send_template",
+    "manycontacts.messages.send.template",
     "Send a WhatsApp Business template message (for outbound messaging outside the 24h window)",
     {
       phone,

@@ -1,0 +1,398 @@
+{
+  "serverInfo": {
+    "name": "ManyContacts - WhatsApp Business CRM",
+    "version": "1.1.0"
+  },
+  "authentication": {
+    "required": true,
+    "schemes": ["api-key"]
+  },
+  "tools": [
+    {
+      "name": "manycontacts.context",
+      "description": "Get ManyContacts account overview: WhatsApp Business channels, contact/user/tag counts, active AI agents, and enabled features. Use this first to understand the account state.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "Account Overview", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.list",
+      "description": "List WhatsApp Business contacts with filters (tags, team, date, unread, blacklist, scheduled). Returns paginated results.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "page": { "type": "number", "description": "Page number (default 1)" },
+          "limit": { "type": "number", "description": "Results per page, max 200 (default 50)" },
+          "open": { "type": "string", "description": "Filter by open/closed status: 'true' or 'false'" },
+          "assigned_to": { "type": "string", "description": "Filter by assigned user ID" },
+          "tags": { "type": "string", "description": "Comma-separated tag IDs (contacts must have ALL tags)" },
+          "team": { "type": "string", "description": "Filter by team ID" },
+          "stages": { "type": "string", "description": "Comma-separated funnel stage IDs" },
+          "date_from": { "type": "string", "description": "Filter updated after date (YYYY-MM-DD)" },
+          "date_to": { "type": "string", "description": "Filter updated before date (YYYY-MM-DD, max 90 days range)" },
+          "unread": { "type": "string", "description": "Set to 'true' for only contacts with unread messages" },
+          "blacklist": { "type": "string", "description": "Set to 'true' for only blacklisted contacts" },
+          "scheduled": { "type": "string", "description": "Set to 'true' for only contacts with pending scheduled messages" }
+        }
+      },
+      "annotations": { "title": "List Contacts", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.get",
+      "description": "Get detailed information about a WhatsApp Business contact including tags, teams, and funnel stages.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" } }, "required": ["phone"] },
+      "annotations": { "title": "Get Contact", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.create",
+      "description": "Create a new WhatsApp Business contact in ManyContacts CRM.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "name": { "type": "string", "description": "Contact display name" }, "notes": { "type": "string", "description": "Internal notes about the contact" } }, "required": ["phone"] },
+      "annotations": { "title": "Create Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.update",
+      "description": "Update an existing WhatsApp Business contact (name, notes, custom fields).",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "name": { "type": "string", "description": "New contact name" }, "notes": { "type": "string", "description": "New contact notes" }, "customFields": { "type": "string", "description": "Custom fields as JSON string" } }, "required": ["phone"] },
+      "annotations": { "title": "Update Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.delete",
+      "description": "Delete a WhatsApp Business contact from ManyContacts CRM.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" } }, "required": ["phone"] },
+      "annotations": { "title": "Delete Contact", "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.assign",
+      "description": "Assign a WhatsApp Business contact to a team member.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "userId": { "type": "string", "description": "User ID to assign the contact to" } }, "required": ["phone", "userId"] },
+      "annotations": { "title": "Assign Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.unassign",
+      "description": "Unassign a WhatsApp Business contact (remove current user assignment).",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" } }, "required": ["phone"] },
+      "annotations": { "title": "Unassign Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.close",
+      "description": "Close a WhatsApp Business conversation.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" } }, "required": ["phone"] },
+      "annotations": { "title": "Close Conversation", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.open",
+      "description": "Reopen a closed WhatsApp Business conversation.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" } }, "required": ["phone"] },
+      "annotations": { "title": "Reopen Conversation", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.tag.add",
+      "description": "Add a tag to a WhatsApp Business contact.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "tagId": { "type": "string", "description": "Tag ID to add" } }, "required": ["phone", "tagId"] },
+      "annotations": { "title": "Add Tag to Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.tag.remove",
+      "description": "Remove a tag from a WhatsApp Business contact.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "tagId": { "type": "string", "description": "Tag ID to remove" } }, "required": ["phone", "tagId"] },
+      "annotations": { "title": "Remove Tag from Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.team.add",
+      "description": "Add a team to a WhatsApp Business contact.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "teamId": { "type": "string", "description": "Team ID to add" } }, "required": ["phone", "teamId"] },
+      "annotations": { "title": "Add Team to Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.team.remove",
+      "description": "Remove a team from a WhatsApp Business contact.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "teamId": { "type": "string", "description": "Team ID to remove" } }, "required": ["phone", "teamId"] },
+      "annotations": { "title": "Remove Team from Contact", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.set_stage",
+      "description": "Move a WhatsApp Business contact to a funnel/pipeline stage.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "funnel_id": { "type": "string", "description": "Funnel ID" }, "stage_id": { "type": "string", "description": "Stage ID within the funnel" } }, "required": ["phone", "funnel_id", "stage_id"] },
+      "annotations": { "title": "Set Contact Stage", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.contacts.bulk",
+      "description": "Perform bulk operations on multiple WhatsApp Business contacts (close, open, assign, add_tag, add_team).",
+      "inputSchema": { "type": "object", "properties": { "action": { "type": "string", "description": "Bulk action: close, open, assign, add_tag, or add_team" }, "phones": { "type": "string", "description": "Comma-separated phone numbers" }, "value": { "type": "string", "description": "Value for action (user_id for assign, tag_id for add_tag, team_id for add_team)" } }, "required": ["action", "phones"] },
+      "annotations": { "title": "Bulk Contact Operations", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.messages.list",
+      "description": "List WhatsApp Business messages for a contact. Shows the conversation history with timestamps and status.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "page": { "type": "number", "description": "Page number (default 1)" }, "limit": { "type": "number", "description": "Messages per page (default 50)" } }, "required": ["phone"] },
+      "annotations": { "title": "List Messages", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.messages.send.text",
+      "description": "Send a WhatsApp Business text message to a phone number.",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "body": { "type": "string", "description": "Message text to send" } }, "required": ["phone", "body"] },
+      "annotations": { "title": "Send Text Message", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "manycontacts.messages.send.note",
+      "description": "Send an internal note on a WhatsApp Business contact (not visible to the contact).",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "body": { "type": "string", "description": "Internal note text" } }, "required": ["phone", "body"] },
+      "annotations": { "title": "Send Internal Note", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.messages.send.template",
+      "description": "Send a WhatsApp Business template message (for outbound messaging outside the 24h window).",
+      "inputSchema": { "type": "object", "properties": { "phone": { "type": "string", "description": "Phone number with country code, e.g. 34600000000" }, "templateId": { "type": "string", "description": "Template ID to send" }, "variables": { "type": "string", "description": "Template variables as JSON array, e.g. '[\"John\",\"20%\"]'" } }, "required": ["phone", "templateId"] },
+      "annotations": { "title": "Send Template Message", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "manycontacts.templates.list",
+      "description": "List WhatsApp Business message templates. Templates are required for sending messages outside the 24h conversation window.",
+      "inputSchema": { "type": "object", "properties": { "status": { "type": "string", "description": "Filter by template status: approved, pending, or rejected" } } },
+      "annotations": { "title": "List Templates", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.templates.get",
+      "description": "Get details of a specific WhatsApp Business message template including components and configuration.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "Template ID" } }, "required": ["id"] },
+      "annotations": { "title": "Get Template", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.templates.sync",
+      "description": "Sync WhatsApp Business templates from Meta Cloud API. Fetches the latest templates from the connected WhatsApp Business account.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "Sync Templates", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": true }
+    },
+    {
+      "name": "manycontacts.campaigns.list",
+      "description": "List WhatsApp Business bulk messaging campaigns with statistics (sent, delivered, read, failed counts).",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "List Campaigns", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.campaigns.create",
+      "description": "Create a WhatsApp Business bulk messaging campaign. Sends a template message to a list of phone numbers at a scheduled time.",
+      "inputSchema": { "type": "object", "properties": { "name": { "type": "string", "description": "Campaign name" }, "templateId": { "type": "string", "description": "WhatsApp template ID to use" }, "phones": { "type": "string", "description": "Comma-separated phone numbers to send to" }, "date": { "type": "string", "description": "Scheduled send date in ISO format, e.g. 2026-12-01T09:00:00" }, "variables": { "type": "string", "description": "Template variables as JSON array, e.g. '[\"John\",\"20%\"]'" } }, "required": ["name", "templateId", "phones", "date"] },
+      "annotations": { "title": "Create Campaign", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "manycontacts.campaigns.delete",
+      "description": "Delete a WhatsApp Business campaign.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "Campaign ID to delete" } }, "required": ["id"] },
+      "annotations": { "title": "Delete Campaign", "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.org.get",
+      "description": "Get WhatsApp Business organization/account information (name, timezone, settings).",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "Get Organization", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.org.update",
+      "description": "Update WhatsApp Business organization settings (timezone, auto-reply, webhooks, etc.).",
+      "inputSchema": { "type": "object", "properties": { "timezone": { "type": "string", "description": "Timezone, e.g. Europe/Madrid" }, "auto_reply_open": { "type": "boolean", "description": "Enable auto-reply on chat open" }, "auto_reply_open_text": { "type": "string", "description": "Auto-reply text when chat opens" }, "auto_reply_close": { "type": "boolean", "description": "Enable auto-reply on chat close" }, "auto_reply_close_text": { "type": "string", "description": "Auto-reply text when chat closes" }, "auto_reply_close_minutes": { "type": "number", "description": "Minutes before auto-close" }, "auto_reply_away": { "type": "boolean", "description": "Enable away auto-reply" }, "auto_reply_away_text": { "type": "string", "description": "Away auto-reply text" }, "webhooks_forward": { "type": "boolean", "description": "Enable webhook forwarding" }, "webhooks_forward_url": { "type": "string", "description": "Webhook forward URL" } } },
+      "annotations": { "title": "Update Organization", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.org.schedule.get",
+      "description": "Get the business hours schedule for the WhatsApp Business account.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "Get Business Hours", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.org.apikey",
+      "description": "Get the organization API key.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "Get API Key", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.channels.list",
+      "description": "List connected WhatsApp Business and Instagram channels.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "List Channels", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.tags.list",
+      "description": "List all tags for categorizing WhatsApp Business contacts.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "List Tags", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.tags.create",
+      "description": "Create a new tag for WhatsApp Business contacts.",
+      "inputSchema": { "type": "object", "properties": { "name": { "type": "string", "description": "Tag name" }, "color": { "type": "string", "description": "Tag color hex, e.g. #ff0000 (default #fab1a0)" } }, "required": ["name"] },
+      "annotations": { "title": "Create Tag", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.tags.update",
+      "description": "Update an existing WhatsApp Business contact tag.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "Tag ID" }, "name": { "type": "string", "description": "New tag name" }, "color": { "type": "string", "description": "New tag color hex" } }, "required": ["id"] },
+      "annotations": { "title": "Update Tag", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.tags.delete",
+      "description": "Delete a WhatsApp Business contact tag.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "Tag ID to delete" } }, "required": ["id"] },
+      "annotations": { "title": "Delete Tag", "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.teams.list",
+      "description": "List teams in the WhatsApp Business organization.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "List Teams", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.teams.create",
+      "description": "Create a new team in the WhatsApp Business organization.",
+      "inputSchema": { "type": "object", "properties": { "name": { "type": "string", "description": "Team name" } }, "required": ["name"] },
+      "annotations": { "title": "Create Team", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.teams.add_member",
+      "description": "Add a user to a team.",
+      "inputSchema": { "type": "object", "properties": { "teamId": { "type": "string", "description": "Team ID" }, "userId": { "type": "string", "description": "User ID to add" } }, "required": ["teamId", "userId"] },
+      "annotations": { "title": "Add Team Member", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.teams.remove_member",
+      "description": "Remove a user from a team.",
+      "inputSchema": { "type": "object", "properties": { "teamId": { "type": "string", "description": "Team ID" }, "userId": { "type": "string", "description": "User ID to remove" } }, "required": ["teamId", "userId"] },
+      "annotations": { "title": "Remove Team Member", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.teams.delete",
+      "description": "Delete a team from the WhatsApp Business organization.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "Team ID to delete" } }, "required": ["id"] },
+      "annotations": { "title": "Delete Team", "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.funnels.list",
+      "description": "List sales funnels/pipelines for organizing WhatsApp Business contacts by stage.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "List Funnels", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.funnels.create",
+      "description": "Create a new sales funnel/pipeline for WhatsApp Business contacts.",
+      "inputSchema": { "type": "object", "properties": { "name": { "type": "string", "description": "Funnel name" } }, "required": ["name"] },
+      "annotations": { "title": "Create Funnel", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.funnels.add_stage",
+      "description": "Add a stage to a sales funnel/pipeline.",
+      "inputSchema": { "type": "object", "properties": { "funnelId": { "type": "string", "description": "Funnel ID" }, "name": { "type": "string", "description": "Stage name" }, "order": { "type": "number", "description": "Stage order position" } }, "required": ["funnelId", "name", "order"] },
+      "annotations": { "title": "Add Funnel Stage", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.funnels.update_stage",
+      "description": "Update a stage in a sales funnel/pipeline.",
+      "inputSchema": { "type": "object", "properties": { "funnelId": { "type": "string", "description": "Funnel ID" }, "stageId": { "type": "string", "description": "Stage ID to update" }, "name": { "type": "string", "description": "New stage name" } }, "required": ["funnelId", "stageId"] },
+      "annotations": { "title": "Update Funnel Stage", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.funnels.contacts",
+      "description": "List contacts in a funnel/pipeline, optionally filtered by stage.",
+      "inputSchema": { "type": "object", "properties": { "funnelId": { "type": "string", "description": "Funnel ID" }, "stage_id": { "type": "string", "description": "Filter by stage ID" }, "page": { "type": "number", "description": "Page number" }, "limit": { "type": "number", "description": "Results per page" } }, "required": ["funnelId"] },
+      "annotations": { "title": "List Funnel Contacts", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.funnels.delete",
+      "description": "Delete a sales funnel/pipeline.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "Funnel ID to delete" } }, "required": ["id"] },
+      "annotations": { "title": "Delete Funnel", "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.users.list",
+      "description": "List team members/users in the WhatsApp Business organization.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "List Users", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.users.get",
+      "description": "Get details of a specific team member/user.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "User ID" } }, "required": ["id"] },
+      "annotations": { "title": "Get User", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.users.update",
+      "description": "Update a team member/user profile.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "User ID" }, "name": { "type": "string", "description": "User name" } }, "required": ["id"] },
+      "annotations": { "title": "Update User", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.users.invite",
+      "description": "Invite a new team member to the WhatsApp Business organization.",
+      "inputSchema": { "type": "object", "properties": { "email": { "type": "string", "description": "Email address to invite" } }, "required": ["email"] },
+      "annotations": { "title": "Invite User", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": false, "openWorldHint": true }
+    },
+    {
+      "name": "manycontacts.users.delete",
+      "description": "Remove a team member from the WhatsApp Business organization.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "User ID to remove" } }, "required": ["id"] },
+      "annotations": { "title": "Delete User", "readOnlyHint": false, "destructiveHint": true, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.ai_agents.list",
+      "description": "List AI agents configured to auto-respond to WhatsApp Business messages.",
+      "inputSchema": { "type": "object", "properties": {} },
+      "annotations": { "title": "List AI Agents", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.ai_agents.get",
+      "description": "Get details of a specific WhatsApp AI agent including scenarios and configuration.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "AI Agent ID (UUID)" } }, "required": ["id"] },
+      "annotations": { "title": "Get AI Agent", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.ai_agents.update",
+      "description": "Update a WhatsApp AI agent's configuration (instructions, active status, etc.).",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "AI Agent ID (UUID)" }, "active": { "type": "boolean", "description": "Enable or disable the agent" }, "block_1": { "type": "string", "description": "Agent instructions block 1" }, "block_2": { "type": "string", "description": "Agent instructions block 2" }, "block_3": { "type": "string", "description": "Agent instructions block 3" } }, "required": ["id"] },
+      "annotations": { "title": "Update AI Agent", "readOnlyHint": false, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    },
+    {
+      "name": "manycontacts.ai_agents.feedback",
+      "description": "Get feedback/conversation logs for a WhatsApp AI agent.",
+      "inputSchema": { "type": "object", "properties": { "id": { "type": "string", "description": "AI Agent ID (UUID)" } }, "required": ["id"] },
+      "annotations": { "title": "Get AI Agent Feedback", "readOnlyHint": true, "destructiveHint": false, "idempotentHint": true, "openWorldHint": false }
+    }
+  ],
+  "prompts": [
+    {
+      "name": "contact-lookup",
+      "description": "Look up a WhatsApp contact and summarize their profile, tags, funnel stage, and recent messages",
+      "arguments": [
+        { "name": "phone", "description": "Phone number in international format, e.g. +34612345678", "required": true }
+      ]
+    },
+    {
+      "name": "send-campaign",
+      "description": "Guide through creating and sending a WhatsApp bulk campaign with a template",
+      "arguments": []
+    },
+    {
+      "name": "daily-dashboard",
+      "description": "Get a complete overview of your ManyContacts account: channels, teams, open conversations, and recent activity",
+      "arguments": []
+    },
+    {
+      "name": "reply-to-contact",
+      "description": "Draft and send a WhatsApp message to a contact after reviewing their conversation history",
+      "arguments": [
+        { "name": "phone", "description": "Phone number in international format, e.g. +34612345678", "required": true },
+        { "name": "message", "description": "The message text to send", "required": true }
+      ]
+    },
+    {
+      "name": "manage-funnel",
+      "description": "View sales funnels, their stages, and contacts in each stage to manage your sales pipeline",
+      "arguments": []
+    },
+    {
+      "name": "bulk-tag-contacts",
+      "description": "Tag multiple WhatsApp contacts at once by applying a tag to a list of phone numbers",
+      "arguments": [
+        { "name": "phones", "description": "Comma-separated phone numbers, e.g. +34612345678,+34698765432", "required": true },
+        { "name": "tagName", "description": "Name of the tag to apply", "required": true }
+      ]
+    }
+  ]
+}

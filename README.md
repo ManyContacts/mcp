@@ -1,3 +1,5 @@
+[![smithery badge](https://smithery.ai/badge/manycontacts/whatsapp-mcp)](https://smithery.ai/servers/manycontacts/whatsapp-mcp)
+
 # ManyContacts MCP Server
 
 MCP (Model Context Protocol) server for [ManyContacts](https://manycontacts.com) — the WhatsApp Business CRM. Enables AI agents (Claude, Cursor, Windsurf, etc.) to manage contacts, send WhatsApp messages, run campaigns, configure AI auto-replies, and perform all CRM operations programmatically.
@@ -75,11 +77,11 @@ Add to `.cursor/mcp.json`:
 
 ---
 
-## Available Tools (47 total)
+## Available Tools (55 total)
 
 ### Account & Context
 
-#### `manycontacts_context`
+#### `manycontacts.context`
 
 Get a full overview of your ManyContacts account: connected WhatsApp Business channels, contact/user/tag counts, active AI agents, and enabled features. **Use this first** to understand the account state before performing other operations.
 
@@ -89,7 +91,7 @@ Get a full overview of your ManyContacts account: connected WhatsApp Business ch
 
 ---
 
-#### `manycontacts_org_get`
+#### `manycontacts.org.get`
 
 Get WhatsApp Business organization/account information including name, timezone, and all configuration settings.
 
@@ -99,7 +101,7 @@ Get WhatsApp Business organization/account information including name, timezone,
 
 ---
 
-#### `manycontacts_org_update`
+#### `manycontacts.org.update`
 
 Update organization-level settings such as timezone, auto-reply messages, auto-close behavior, and webhook configuration.
 
@@ -118,7 +120,7 @@ Update organization-level settings such as timezone, auto-reply messages, auto-c
 
 ---
 
-#### `manycontacts_org_schedule_get`
+#### `manycontacts.org.schedule.get`
 
 Get the business hours schedule. Returns the configured working hours for each day of the week, used to determine when the "away" auto-reply activates.
 
@@ -128,7 +130,7 @@ Get the business hours schedule. Returns the configured working hours for each d
 
 ---
 
-#### `manycontacts_org_apikey`
+#### `manycontacts.org.apikey`
 
 Get the organization's REST API key for direct API integrations.
 
@@ -138,7 +140,7 @@ Get the organization's REST API key for direct API integrations.
 
 ---
 
-#### `manycontacts_channels_list`
+#### `manycontacts.channels.list`
 
 List all connected WhatsApp Business and Instagram channels. For WhatsApp channels, shows the phone number and connection status. For Instagram channels, shows the username.
 
@@ -152,7 +154,7 @@ List all connected WhatsApp Business and Instagram channels. For WhatsApp channe
 
 All contact operations use phone numbers as identifiers (with country code, no `+` prefix, e.g. `34600000000`).
 
-#### `manycontacts_contacts_list`
+#### `manycontacts.contacts.list`
 
 List WhatsApp Business contacts with advanced filters. Returns paginated results with `has_more` indicator. Filters can be combined freely.
 
@@ -195,7 +197,7 @@ List WhatsApp Business contacts with advanced filters. Returns paginated results
 
 ---
 
-#### `manycontacts_contacts_get`
+#### `manycontacts.contacts.get`
 
 Get detailed information about a specific contact including their tags, teams, funnel stages, and custom fields.
 
@@ -205,7 +207,7 @@ Get detailed information about a specific contact including their tags, teams, f
 
 ---
 
-#### `manycontacts_contacts_create`
+#### `manycontacts.contacts.create`
 
 Create a new WhatsApp Business contact in the CRM. The phone number will be normalized automatically (leading `+` removed).
 
@@ -217,7 +219,7 @@ Create a new WhatsApp Business contact in the CRM. The phone number will be norm
 
 ---
 
-#### `manycontacts_contacts_update`
+#### `manycontacts.contacts.update`
 
 Update an existing contact's name, notes, or custom fields.
 
@@ -230,7 +232,7 @@ Update an existing contact's name, notes, or custom fields.
 
 ---
 
-#### `manycontacts_contacts_delete`
+#### `manycontacts.contacts.delete`
 
 Permanently delete a contact from the CRM.
 
@@ -240,18 +242,18 @@ Permanently delete a contact from the CRM.
 
 ---
 
-#### `manycontacts_contacts_assign`
+#### `manycontacts.contacts.assign`
 
 Assign a contact to a specific team member. The assigned user will see this contact in their personal inbox.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `phone` | `string` | **Yes** | Phone number of the contact |
-| `userId` | `string` | **Yes** | User ID to assign the contact to (use `manycontacts_users_list` to get IDs) |
+| `userId` | `string` | **Yes** | User ID to assign the contact to (use `manycontacts.users.list` to get IDs) |
 
 ---
 
-#### `manycontacts_contacts_unassign`
+#### `manycontacts.contacts.unassign`
 
 Remove the current user assignment from a contact. The contact returns to the general unassigned inbox.
 
@@ -261,7 +263,7 @@ Remove the current user assignment from a contact. The contact returns to the ge
 
 ---
 
-#### `manycontacts_contacts_close`
+#### `manycontacts.contacts.close`
 
 Close a WhatsApp conversation. Closed conversations are archived and won't appear in the active inbox.
 
@@ -271,7 +273,7 @@ Close a WhatsApp conversation. Closed conversations are archived and won't appea
 
 ---
 
-#### `manycontacts_contacts_open`
+#### `manycontacts.contacts.open`
 
 Reopen a previously closed WhatsApp conversation. The contact will appear again in the active inbox.
 
@@ -281,9 +283,9 @@ Reopen a previously closed WhatsApp conversation. The contact will appear again 
 
 ---
 
-#### `manycontacts_contacts_tag_add`
+#### `manycontacts.contacts.tag.add`
 
-Add a tag to a contact. Use `manycontacts_tags_list` to get available tag IDs.
+Add a tag to a contact. Use `manycontacts.tags.list` to get available tag IDs.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -292,7 +294,7 @@ Add a tag to a contact. Use `manycontacts_tags_list` to get available tag IDs.
 
 ---
 
-#### `manycontacts_contacts_tag_remove`
+#### `manycontacts.contacts.tag.remove`
 
 Remove a tag from a contact.
 
@@ -303,9 +305,9 @@ Remove a tag from a contact.
 
 ---
 
-#### `manycontacts_contacts_team_add`
+#### `manycontacts.contacts.team.add`
 
-Add a team to a contact. Use `manycontacts_teams_list` to get available team IDs.
+Add a team to a contact. Use `manycontacts.teams.list` to get available team IDs.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -314,7 +316,7 @@ Add a team to a contact. Use `manycontacts_teams_list` to get available team IDs
 
 ---
 
-#### `manycontacts_contacts_team_remove`
+#### `manycontacts.contacts.team.remove`
 
 Remove a team from a contact.
 
@@ -325,9 +327,9 @@ Remove a team from a contact.
 
 ---
 
-#### `manycontacts_contacts_set_stage`
+#### `manycontacts.contacts.set_stage`
 
-Move a contact to a specific stage within a sales funnel/pipeline. Use `manycontacts_funnels_list` to get funnel and stage IDs.
+Move a contact to a specific stage within a sales funnel/pipeline. Use `manycontacts.funnels.list` to get funnel and stage IDs.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -337,7 +339,7 @@ Move a contact to a specific stage within a sales funnel/pipeline. Use `manycont
 
 ---
 
-#### `manycontacts_contacts_bulk`
+#### `manycontacts.contacts.bulk`
 
 Perform bulk operations on multiple contacts at once. Supports closing, opening, assigning, tagging, and team assignment.
 
@@ -351,7 +353,7 @@ Perform bulk operations on multiple contacts at once. Supports closing, opening,
 
 ### Messaging
 
-#### `manycontacts_messages_list`
+#### `manycontacts.messages.list`
 
 List WhatsApp conversation messages for a contact. Returns messages in a conversation-friendly format with timestamps, status, and sender information.
 
@@ -363,9 +365,9 @@ List WhatsApp conversation messages for a contact. Returns messages in a convers
 
 ---
 
-#### `manycontacts_messages_send_text`
+#### `manycontacts.messages.send.text`
 
-Send a WhatsApp text message to a contact. Only works within the 24-hour conversation window. Use `manycontacts_messages_send_template` to initiate conversations outside this window.
+Send a WhatsApp text message to a contact. Only works within the 24-hour conversation window. Use `manycontacts.messages.send.template` to initiate conversations outside this window.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
@@ -374,7 +376,7 @@ Send a WhatsApp text message to a contact. Only works within the 24-hour convers
 
 ---
 
-#### `manycontacts_messages_send_note`
+#### `manycontacts.messages.send.note`
 
 Create an internal note on a contact's conversation. Notes are only visible to team members and are **not** sent to the WhatsApp contact.
 
@@ -385,14 +387,14 @@ Create an internal note on a contact's conversation. Notes are only visible to t
 
 ---
 
-#### `manycontacts_messages_send_template`
+#### `manycontacts.messages.send.template`
 
 Send a WhatsApp Business template message. Templates are required to initiate conversations outside the 24-hour window or for bulk outbound messaging. Templates must be pre-approved by Meta.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `phone` | `string` | **Yes** | Phone number to send the template to |
-| `templateId` | `string` | **Yes** | Template ID (use `manycontacts_templates_list` to get IDs) |
+| `templateId` | `string` | **Yes** | Template ID (use `manycontacts.templates.list` to get IDs) |
 | `variables` | `string` | No | Template variables as a JSON array string (e.g. `'["John","20%"]'`) |
 
 ---
@@ -401,7 +403,7 @@ Send a WhatsApp Business template message. Templates are required to initiate co
 
 WhatsApp Business templates are pre-approved message formats required for outbound messaging outside the 24-hour conversation window.
 
-#### `manycontacts_templates_list`
+#### `manycontacts.templates.list`
 
 List all WhatsApp Business message templates. Shows template name, code, status, components, and media flags.
 
@@ -411,7 +413,7 @@ List all WhatsApp Business message templates. Shows template name, code, status,
 
 ---
 
-#### `manycontacts_templates_get`
+#### `manycontacts.templates.get`
 
 Get full details of a specific template including its components (header, body, footer, buttons), configuration, and media attachments.
 
@@ -421,7 +423,7 @@ Get full details of a specific template including its components (header, body, 
 
 ---
 
-#### `manycontacts_templates_sync`
+#### `manycontacts.templates.sync`
 
 Sync WhatsApp Business templates from Meta Cloud API. Fetches the latest templates from the connected WhatsApp Business account. Useful after creating or modifying templates in the Meta Business Manager.
 
@@ -435,7 +437,7 @@ Sync WhatsApp Business templates from Meta Cloud API. Fetches the latest templat
 
 Campaigns allow bulk sending of WhatsApp template messages to a list of phone numbers at a scheduled time.
 
-#### `manycontacts_campaigns_list`
+#### `manycontacts.campaigns.list`
 
 List all WhatsApp Business bulk messaging campaigns with statistics (sent, delivered, read, and failed counts), template names, and scheduled dates.
 
@@ -445,7 +447,7 @@ List all WhatsApp Business bulk messaging campaigns with statistics (sent, deliv
 
 ---
 
-#### `manycontacts_campaigns_create`
+#### `manycontacts.campaigns.create`
 
 Create a new WhatsApp Business bulk messaging campaign. The campaign will send a template message to the specified phone numbers at the scheduled time.
 
@@ -459,7 +461,7 @@ Create a new WhatsApp Business bulk messaging campaign. The campaign will send a
 
 ---
 
-#### `manycontacts_campaigns_delete`
+#### `manycontacts.campaigns.delete`
 
 Delete a WhatsApp Business campaign. Only pending (not yet sent) campaigns can be deleted.
 
@@ -473,7 +475,7 @@ Delete a WhatsApp Business campaign. Only pending (not yet sent) campaigns can b
 
 Tags are colored labels used to categorize and filter WhatsApp Business contacts (e.g. "VIP", "Support", "Lead").
 
-#### `manycontacts_tags_list`
+#### `manycontacts.tags.list`
 
 List all available tags with their names, colors, and IDs.
 
@@ -483,7 +485,7 @@ List all available tags with their names, colors, and IDs.
 
 ---
 
-#### `manycontacts_tags_create`
+#### `manycontacts.tags.create`
 
 Create a new tag for categorizing contacts.
 
@@ -494,7 +496,7 @@ Create a new tag for categorizing contacts.
 
 ---
 
-#### `manycontacts_tags_update`
+#### `manycontacts.tags.update`
 
 Update an existing tag's name or color.
 
@@ -506,7 +508,7 @@ Update an existing tag's name or color.
 
 ---
 
-#### `manycontacts_tags_delete`
+#### `manycontacts.tags.delete`
 
 Delete a tag. The tag will be removed from all contacts that have it.
 
@@ -520,7 +522,7 @@ Delete a tag. The tag will be removed from all contacts that have it.
 
 Teams group users together for assignment routing and contact organization.
 
-#### `manycontacts_teams_list`
+#### `manycontacts.teams.list`
 
 List all teams in the organization.
 
@@ -530,7 +532,7 @@ List all teams in the organization.
 
 ---
 
-#### `manycontacts_teams_create`
+#### `manycontacts.teams.create`
 
 Create a new team.
 
@@ -540,7 +542,7 @@ Create a new team.
 
 ---
 
-#### `manycontacts_teams_add_member`
+#### `manycontacts.teams.add_member`
 
 Add a user to a team.
 
@@ -551,7 +553,7 @@ Add a user to a team.
 
 ---
 
-#### `manycontacts_teams_remove_member`
+#### `manycontacts.teams.remove_member`
 
 Remove a user from a team.
 
@@ -562,7 +564,7 @@ Remove a user from a team.
 
 ---
 
-#### `manycontacts_teams_delete`
+#### `manycontacts.teams.delete`
 
 Delete a team. Team members are not deleted, only the team grouping.
 
@@ -576,7 +578,7 @@ Delete a team. Team members are not deleted, only the team grouping.
 
 Funnels allow you to track contacts through a multi-stage sales or support pipeline (e.g. "New Lead" -> "Qualified" -> "Proposal" -> "Won").
 
-#### `manycontacts_funnels_list`
+#### `manycontacts.funnels.list`
 
 List all sales funnels/pipelines with their stages.
 
@@ -586,7 +588,7 @@ List all sales funnels/pipelines with their stages.
 
 ---
 
-#### `manycontacts_funnels_create`
+#### `manycontacts.funnels.create`
 
 Create a new sales funnel/pipeline.
 
@@ -596,7 +598,7 @@ Create a new sales funnel/pipeline.
 
 ---
 
-#### `manycontacts_funnels_add_stage`
+#### `manycontacts.funnels.add_stage`
 
 Add a new stage to an existing funnel.
 
@@ -608,7 +610,7 @@ Add a new stage to an existing funnel.
 
 ---
 
-#### `manycontacts_funnels_update_stage`
+#### `manycontacts.funnels.update_stage`
 
 Update a stage's name within a funnel.
 
@@ -620,7 +622,7 @@ Update a stage's name within a funnel.
 
 ---
 
-#### `manycontacts_funnels_contacts`
+#### `manycontacts.funnels.contacts`
 
 List contacts currently in a specific funnel, optionally filtered by stage. Returns paginated results.
 
@@ -633,7 +635,7 @@ List contacts currently in a specific funnel, optionally filtered by stage. Retu
 
 ---
 
-#### `manycontacts_funnels_delete`
+#### `manycontacts.funnels.delete`
 
 Delete a sales funnel/pipeline and all its stages. Contacts in the funnel are not deleted.
 
@@ -647,7 +649,7 @@ Delete a sales funnel/pipeline and all its stages. Contacts in the funnel are no
 
 Manage the team members who have access to the WhatsApp Business CRM.
 
-#### `manycontacts_users_list`
+#### `manycontacts.users.list`
 
 List all team members/users in the organization with their roles and details.
 
@@ -657,7 +659,7 @@ List all team members/users in the organization with their roles and details.
 
 ---
 
-#### `manycontacts_users_get`
+#### `manycontacts.users.get`
 
 Get details of a specific team member.
 
@@ -667,7 +669,7 @@ Get details of a specific team member.
 
 ---
 
-#### `manycontacts_users_update`
+#### `manycontacts.users.update`
 
 Update a team member's profile information.
 
@@ -678,7 +680,7 @@ Update a team member's profile information.
 
 ---
 
-#### `manycontacts_users_invite`
+#### `manycontacts.users.invite`
 
 Invite a new team member to the organization by email. They will receive an invitation email to join.
 
@@ -688,7 +690,7 @@ Invite a new team member to the organization by email. They will receive an invi
 
 ---
 
-#### `manycontacts_users_delete`
+#### `manycontacts.users.delete`
 
 Remove a team member from the organization. Their assigned contacts will become unassigned.
 
@@ -702,7 +704,7 @@ Remove a team member from the organization. Their assigned contacts will become 
 
 AI agents auto-respond to incoming WhatsApp messages using configurable instructions and scenarios. Only active agents are listed.
 
-#### `manycontacts_ai_agents_list`
+#### `manycontacts.ai_agents.list`
 
 List all active AI auto-reply agents with their configuration.
 
@@ -712,7 +714,7 @@ List all active AI auto-reply agents with their configuration.
 
 ---
 
-#### `manycontacts_ai_agents_get`
+#### `manycontacts.ai_agents.get`
 
 Get full details of a specific AI agent including its scenarios (conversation flows), instruction blocks, and configuration.
 
@@ -722,7 +724,7 @@ Get full details of a specific AI agent including its scenarios (conversation fl
 
 ---
 
-#### `manycontacts_ai_agents_update`
+#### `manycontacts.ai_agents.update`
 
 Update an AI agent's configuration. You can enable/disable the agent or modify its instruction blocks.
 
@@ -736,13 +738,79 @@ Update an AI agent's configuration. You can enable/disable the agent or modify i
 
 ---
 
-#### `manycontacts_ai_agents_feedback`
+#### `manycontacts.ai_agents.feedback`
 
 Get feedback and conversation logs for an AI agent. Shows how the agent has been responding and user satisfaction data.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `id` | `string` | **Yes** | AI Agent ID (UUID) |
+
+---
+
+## Available Prompts (6 total)
+
+Pre-built prompts that guide AI agents through common workflows. Use these to quickly accomplish multi-step tasks.
+
+### `contact-lookup`
+
+Look up a WhatsApp contact and get a complete summary of their profile, tags, funnel stage, and recent messages.
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| `phone` | **Yes** | Phone number in international format (e.g. `+34612345678`) |
+
+---
+
+### `send-campaign`
+
+Step-by-step guide to creating a WhatsApp bulk campaign: lists available templates, asks for recipients and schedule, then creates the campaign.
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| *(none)* | — | Interactive guided workflow |
+
+---
+
+### `daily-dashboard`
+
+Generates a complete overview of your ManyContacts account including channels, open conversations, team structure, and sales funnels.
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| *(none)* | — | No arguments needed |
+
+---
+
+### `reply-to-contact`
+
+Reviews recent conversation history with a contact, then sends a WhatsApp message with full context.
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| `phone` | **Yes** | Phone number in international format (e.g. `+34612345678`) |
+| `message` | **Yes** | The message text to send |
+
+---
+
+### `manage-funnel`
+
+Displays all sales funnels with their stages and contact counts per stage, giving a visual pipeline overview.
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| *(none)* | — | No arguments needed |
+
+---
+
+### `bulk-tag-contacts`
+
+Tags multiple contacts at once — finds or creates the tag, then applies it in bulk.
+
+| Argument | Required | Description |
+|----------|----------|-------------|
+| `phones` | **Yes** | Comma-separated phone numbers (e.g. `+34612345678,+34698765432`) |
+| `tagName` | **Yes** | Name of the tag to apply |
 
 ---
 
