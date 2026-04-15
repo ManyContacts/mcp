@@ -15,7 +15,7 @@
     "README.md",
     "server.json"
   ],
-  "mcpName": "io.github.ManyContacts/whatsapp-business",
+  "mcpName": "io.github.ManyContacts/whatsapp-mcp",
   "scripts": {
     "build": "tsc",
     "start": "node build/index.js",
@@ -31,12 +31,15 @@
     "whatsapp-business",
     "manycontacts",
     "crm",
+    "whatsapp-marketing",
+    "whatsapp-campaigns",
     "messaging",
     "ai-agent",
     "claude",
-    "cursor"
+    "cursor",
+    "smithery"
   ],
-  "author": "ManyContacts <hello@manycontacts.com> (https://manycontacts.com)",
+  "author": "ManyContacts <support@manycontacts.com> (https://manycontacts.com)",
   "homepage": "https://github.com/manycontacts/mcp#readme",
   "repository": {
     "type": "git",

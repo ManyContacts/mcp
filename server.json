@@ -1,8 +1,8 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
-  "name": "io.github.ManyContacts/whatsapp-business",
-  "title": "ManyContacts - WhatsApp Business CRM",
-  "description": "WhatsApp Business CRM: send messages, manage contacts, campaigns, and AI agents.",
+  "name": "io.github.ManyContacts/whatsapp-mcp",
+  "title": "ManyContacts - WhatsApp Business MCP",
+  "description": "WhatsApp Business MCP: send messages, manage contacts, campaigns, and AI agents.",
   "repository": {
     "url": "https://github.com/manycontacts/mcp",
     "source": "github"
